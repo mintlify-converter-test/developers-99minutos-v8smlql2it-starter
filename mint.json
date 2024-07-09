@@ -1,91 +1,292 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "developers-99minutos",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/regular.svg",
+    "light": "/logo/inverted.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#85c440",
+    "light": "#78b337",
+    "dark": "#85c440",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#85c440",
+      "to": "#78b337"
     }
   },
   "topbarLinks": [
     {
-      "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "name": "Hablar con un asesor",
+      "url": "https://mgei8h73g11.typeform.com/to/Vr0wrWAY"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Crea tu cuenta",
+    "url": "https://envios.99minutos.com/signup"
   },
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference"
+      "url": "reference"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
-    },
-    {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
-    },
-    {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "url": "https://99minutos.com/blog/"
     }
   ],
+  "modeToggle": {
+    "default": "light"
+  },
   "navigation": [
     {
-      "group": "Get Started",
+      "group": "AUTENTICARTE",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "docs/getting-started",
+        "docs/obtener-credenciales"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "PRODUCTOS",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "docs/connect-with-fulfillment99",
+        "docs/punto99"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "ACERCA DE",
       "pages": [
-        "api-reference/introduction"
+        "docs/tipo-de-envios",
+        "docs/tipos-de-impresi%25C3%25B3n-de-gu%25C3%25ADas",
+        "docs/direcciones-correctas",
+        "docs/peso-y-volumen-de-mis-env%25C3%25ADos",
+        "docs/peso-y-volumen-de-mis-env%25C3%25ADos-1",
+        "docs/validar-cobertura",
+        "docs/glosario-de-terminolog%25C3%25ADa",
+        "docs/estados-de-99minutos"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "API VERSION 3",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        {
+          "group": "orders",
+          "pages": [
+            "reference/orders_confirm_create",
+            "reference/orders_retrieve",
+            "reference/orders_list",
+            "reference/orders_create"
+          ]
+        },
+        {
+          "group": "coverage",
+          "pages": [
+            "reference/getzipcodesbycountry"
+          ]
+        },
+        {
+          "group": "documents",
+          "pages": [
+            "reference/documents_guides_create",
+            "reference/documents_zpl_create"
+          ]
+        },
+        {
+          "group": "locations",
+          "pages": [
+            "reference/locations_create",
+            "reference/locations_all_retrieve",
+            "reference/locations_nearest_create"
+          ]
+        },
+        {
+          "group": "oauth",
+          "pages": [
+            "reference/oauth_token_create"
+          ]
+        },
+        {
+          "group": "shipments",
+          "pages": [
+            "reference/get-api-v3-shipments-id",
+            "reference/shipments_partial_update",
+            "reference/delete-api-v3-shipments-id",
+            "reference/shipments_tracking_retrieve",
+            "reference/shipments_tracking_batch_retrieve"
+          ]
+        },
+        {
+          "group": "webhooks",
+          "pages": [
+            "reference/post-api-v3-webhooks",
+            "reference/get-api-v3-webhooks",
+            "reference/patch-api-v3-webhooks-webhook_id",
+            "reference/delete-api-v3-webhooks-webhook_id",
+            "reference/get-api-v3-webhooks-evidences-by-tracking-id"
+          ]
+        },
+        {
+          "group": "shipping-rates",
+          "pages": [
+            "reference/get_api-v3-shipping-rates-addresses-origin-country-origin-address-destination-country-destination-address",
+            "reference/get_api-v3-shipping-rates-coordinates-origin-country-origin-lat-origin-lng-destination-country-destination-lat-destination-lng",
+            "reference/get_api-v3-shipping-rates-sizes",
+            "reference/get_api-v3-shipping-rates-zipcodes-origin-country-origin-zipcode-destination-country-destination-zipcode"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API RUTA99 V1",
+      "pages": [
+        {
+          "group": "Auth",
+          "pages": [
+            "reference/post_oauth-token"
+          ]
+        },
+        {
+          "group": "Customers",
+          "pages": [
+            "reference/get_v1-customer",
+            "reference/post_v1-customer",
+            "reference/get_v1-customer-10",
+            "reference/put_v1-customer-5",
+            "reference/delete_v1-customer-5"
+          ]
+        },
+        {
+          "group": "Orders",
+          "pages": [
+            "reference/get_v1-order",
+            "reference/post_v1-order",
+            "reference/post_api-v1-order-guides",
+            "reference/post_api-v1-order-guidesbyscenario",
+            "reference/get_v1-order-1",
+            "reference/put_v1-order-1",
+            "reference/delete_v1-order-1"
+          ]
+        },
+        {
+          "group": "Vehicles",
+          "pages": [
+            "reference/get_v1-vehicle",
+            "reference/post_v1-vehicle",
+            "reference/delete_v1-vehicle",
+            "reference/get_v1-vehicle-1",
+            "reference/post_v1-vehicle-1"
+          ]
+        },
+        {
+          "group": "Depots",
+          "pages": [
+            "reference/get_v1-depot",
+            "reference/post_v1-depot",
+            "reference/get_v1-depot-depot-id-vehicle",
+            "reference/put_v1-depot-1",
+            "reference/delete_v1-depot-1"
+          ]
+        },
+        {
+          "group": "Scenarios",
+          "pages": [
+            "reference/get_v1-scenario",
+            "reference/post_v1-scenario",
+            "reference/post_v1-scenario-124-copy",
+            "reference/post_v1-scenario-complete",
+            "reference/post_v1-scenario-1-optimize",
+            "reference/get_v1-scenario-214-fetch-best-solution",
+            "reference/put_v1-scenario-38-cancel",
+            "reference/get_v1-scenario-1",
+            "reference/put_v1-scenario-1",
+            "reference/get_v1-scenario-1-export",
+            "reference/delete_v1-scenario-11",
+            "reference/put_v1-scenario-1-vehicles",
+            "reference/delete_v1-scenario-6-vehicle-17",
+            "reference/post_v1-scenario-1-import",
+            "reference/get_v1-scenario-1-order"
+          ]
+        },
+        {
+          "group": "Route",
+          "pages": [
+            "reference/put_v1-route-319-reorder",
+            "reference/get_v1-route-export"
+          ]
+        },
+        {
+          "group": "Settings",
+          "pages": [
+            "reference/get_v1-settings-solver",
+            "reference/put_v1-settings-solver",
+            "reference/get_v1-settings-cod",
+            "reference/put_v1-settings-cod"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "API MULTIBOX 1",
+      "pages": [
+        {
+          "group": "Orders",
+          "pages": [
+            "reference/createmultiboxorder"
+          ]
+        }
+      ]
+    },
+    {
+      "group": "FULFILLMENT V1 DOCUMENTATION",
+      "pages": [
+        "reference/first-steps",
+        {
+          "group": "📦 Products",
+          "pages": [
+            "reference/get_api-v1-products",
+            "reference/post_api-v1-products",
+            "reference/get_api-v1-products-sku-product",
+            "reference/patch_api-v1-products-sku-product",
+            "reference/post_api-v1-products-batch",
+            "reference/post_api-v1-products-template",
+            "reference/post_api-v1-products-import"
+          ]
+        },
+        {
+          "group": "🚐 Arrival orders",
+          "pages": [
+            "reference/get_api-v1-arrival-orders",
+            "reference/post_api-v1-arrival-orders",
+            "reference/post_api-v1-arrival-orders-arrival-order-identifier-docs",
+            "reference/patch_api-v1-arrival-orders-arrival-order-identifier"
+          ]
+        },
+        {
+          "group": "📖 Orders",
+          "pages": [
+            "reference/get_api-v1-orders",
+            "reference/post_api-v1-orders",
+            "reference/get_api-v1-orders-order-id",
+            "reference/patch_api-v1-orders-order-id"
+          ]
+        }
       ]
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
-  }
+    "linkedin": "https://www.linkedin.com/company/99minutos-com/",
+    "instagram": "https://www.instagram.com/99minutoslatam/",
+    "facebook": "https://www.facebook.com/99minutos/",
+    "youtube": "https://www.youtube.com/channel/UCBvysYa3KVY0osl21_HEkag",
+    "tiktok": "https://www.tiktok.com/@99minutos.com"
+  },
+  "openapi": [
+    "/openapi-0.json",
+    "/openapi-1.json",
+    "/openapi-2.json",
+    "/openapi-3.json"
+  ]
 }
