@@ -1,0 +1,360 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Version 1",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://sandbox.99minutos.com",
+            "description": "Sandbox Environment"
+        },
+        {
+            "url": "https://delivery.99minutos.com",
+            "description": "Production Environment"
+        }
+    ],
+    "paths": {
+        "/api/v1/orders/multibox": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create multibox orders",
+                "description": "Create multibox orders. N child shipments will be created plus the master shipment. The number of child shipments is determined by the `packages` field, and by default, always 1 master shipment is created.\n",
+                "operationId": "createMultiboxOrder",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MultiboxOrderRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "$ref": "#/components/schemas/BadRequestResponse1"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/BadRequestResponse2"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/BadRequestResponse3"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "MultiboxOrderRequest": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "API key for authentication",
+                        "example": "15b6d64efc25c4755633332233443308f39c5931"
+                    },
+                    "deliveryType": {
+                        "type": "string",
+                        "description": "Type of delivery",
+                        "enum": [
+                            "taylormade",
+                            "sameday",
+                            "nextday",
+                            "nxd",
+                            "spt",
+                            "tlm",
+                            "smd"
+                        ],
+                        "example": "nextday"
+                    },
+                    "packageSize": {
+                        "type": "string",
+                        "description": "Size of the package",
+                        "enum": [
+                            "xs",
+                            "s",
+                            "m",
+                            "l",
+                            "xl"
+                        ],
+                        "example": "l"
+                    },
+                    "notes": {
+                        "type": "string",
+                        "description": "Additional notes",
+                        "example": " s/r"
+                    },
+                    "packages": {
+                        "type": "integer",
+                        "description": "Number of packages",
+                        "example": 1
+                    },
+                    "cashOnDelivery": {
+                        "type": "boolean",
+                        "description": "Whether cash on delivery is enabled",
+                        "example": false
+                    },
+                    "amountCash": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Amount for cash on delivery",
+                        "example": 0
+                    },
+                    "SecurePackage": {
+                        "type": "boolean",
+                        "description": "Whether secure package is enabled",
+                        "example": false
+                    },
+                    "amountSecure": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Amount for secure package",
+                        "example": 0
+                    },
+                    "receivedId": {
+                        "type": "string",
+                        "description": "Identifier for the received order",
+                        "example": "orders/microservice.local.05.03.24"
+                    },
+                    "origin": {
+                        "$ref": "#/components/schemas/Origin"
+                    },
+                    "destination": {
+                        "$ref": "#/components/schemas/Destination"
+                    }
+                }
+            },
+            "Origin": {
+                "type": "object",
+                "properties": {
+                    "sender": {
+                        "type": "string",
+                        "example": "Food House"
+                    },
+                    "nameSender": {
+                        "type": "string",
+                        "example": "Food"
+                    },
+                    "lastNameSender": {
+                        "type": "string",
+                        "example": "House"
+                    },
+                    "emailSender": {
+                        "type": "string",
+                        "example": "correo@h.com"
+                    },
+                    "phoneSender": {
+                        "type": "string",
+                        "example": "11111111"
+                    },
+                    "addressOrigin": {
+                        "type": "string",
+                        "example": "AV. JESUS REYES HEROLES NO. 6 ESQ."
+                    },
+                    "numberOrigin": {
+                        "type": "string",
+                        "example": "AV. MARAVILLAS COL. EL ROSARIO CEYLAN"
+                    },
+                    "codePostalOrigin": {
+                        "type": "string",
+                        "example": "54092"
+                    },
+                    "country": {
+                        "type": "string",
+                        "enum": [
+                            "MEX",
+                            "CHL",
+                            "PER",
+                            "COL"
+                        ],
+                        "example": "MEX"
+                    }
+                }
+            },
+            "Destination": {
+                "type": "object",
+                "properties": {
+                    "receiver": {
+                        "type": "string",
+                        "example": "David Ludueña"
+                    },
+                    "nameReceiver": {
+                        "type": "string",
+                        "example": "David"
+                    },
+                    "lastNameReceiver": {
+                        "type": "string",
+                        "example": "Ludueña"
+                    },
+                    "emailReceiver": {
+                        "type": "string",
+                        "example": ""
+                    },
+                    "phoneReceiver": {
+                        "type": "string",
+                        "example": "11111111"
+                    },
+                    "addressDestination": {
+                        "type": "string",
+                        "example": "Calle Prol. Melchor, Miguel de la Madrid, Iztapalapa, 09698 Ciudad de México, CDMX"
+                    },
+                    "numberDestination": {
+                        "type": "string",
+                        "example": "s/r"
+                    },
+                    "codePostalDestination": {
+                        "type": "string",
+                        "example": "09698"
+                    },
+                    "country": {
+                        "type": "string",
+                        "enum": [
+                            "MEX",
+                            "CHL",
+                            "PER",
+                            "COL"
+                        ],
+                        "example": "MEX"
+                    }
+                }
+            },
+            "SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "example": 201
+                    },
+                    "data": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "counter": {
+                                    "type": "integer"
+                                },
+                                "trackingid": {
+                                    "type": "string"
+                                },
+                                "clienid": {
+                                    "type": "string"
+                                },
+                                "receivedId": {
+                                    "type": "string"
+                                },
+                                "created": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "trace_id": {
+                        "type": "string",
+                        "example": "72aea272-ce53-41fe-b03f-413e77356c5b"
+                    }
+                }
+            },
+            "BadRequestResponse1": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "traceId": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                },
+                "example": {
+                    "errors": [
+                        "Error on CustomerProfileService"
+                    ],
+                    "traceId": "5e011b32-000f-4896-8aaf-34d7a8f85960",
+                    "code": 400
+                }
+            },
+            "BadRequestResponse2": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "traceId": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                },
+                "example": {
+                    "errors": [
+                        "Delivery type (nedxtday) not allowed"
+                    ],
+                    "traceId": "0b5b0d10-9fd8-43f7-bcd5-cc301c470f7c",
+                    "code": 400
+                }
+            },
+            "BadRequestResponse3": {
+                "type": "object",
+                "properties": {
+                    "errors": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "traceId": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "integer",
+                        "example": 400
+                    }
+                },
+                "example": {
+                    "errors": [
+                        "ShippingRatesService, out of coverage error"
+                    ],
+                    "traceId": "d4a3a4b0-216a-4ef7-b8e9-61f1079c43a8",
+                    "code": 400
+                }
+            }
+        }
+    }
+}
