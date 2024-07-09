@@ -1,0 +1,56 @@
+---
+title: "Estados de 99minutos"
+---
+En 99minutos se tienen dos tipos de estados, los estados **Legacy** y los estados **APIV3**.  
+**Estados Legacy:** Son estados que se utilizaban en el anterior API de 99minutos.  
+**Estados APIV3:** Son estados que se utilizan en la nueva versión del API de 99minutos.  
+Ambos estados se siguen utilizando, en la siguiente tabla se muestran los dos tipos de estados, la relación entre ambos y su descripción.
+
+| Grupo de estados | Código de estado | Descripción de estado | Código de estado Legacy | Estado Legacy |
+| --- | --- | --- | --- | --- |
+| 1000 - Creación |     |     |     |     |
+|     | 1001 | Borrador | N/A | N/A |
+|     | 1002 | Confirmada | 1   | Creado |
+| 2000 - Recolección |     |     |     |     |
+|     | 2001 | Para recoger | 109 | Esperando en punto de recolección ([p99](/docs/punto99) ) |
+|     | 2002 | Conductor  asignado para recoger | 100 | Creado (En proceso de recolección) |
+|     |     |     | 102 | Creado (Segundo intento de recolección) |
+|     |     |     | 104 | Creado (Tercer intento de recolección) |
+|     | 2003 | Recogida confirmada | 2   | Recolectado |
+|     | 2101 | Recogida fallida | 110 | Creado (Recolección no exitosa) |
+|     |     |     | 120 | Creado (Segunda recolección no Exitosa) |
+| 3000 - Tránsito |     |     |     |     |
+|     | 3001 | En almacén | 4   | Contenedorizado |
+|     |     |     | 21  |     |
+|     |     |     | 22  |     |
+|     |     |     | 9   |     |
+|     |     |     | 14  |     |
+|     |     |     | 109.1 | Contenedorizado ([p99](/docs/punto99) ) |
+|     |     |     | 4.2 |     |
+|     | 3002 | Contenedor  asignado | 4.05 | Contenedorizado |
+|     |     |     | 14.05 | Devolución Contenedorizado |
+|     | 3003 | Vehículo asignado | 4.05 | Contenedorizado |
+|     |     |     | 14.05 | Devolución Contenedorizado |
+|     | 3004 | Se ha solicitado una transferencia | 4.1 | En Camino a segunda estación |
+|     |     |     | 14.4 | Devolución en camino a segunda estación |
+| 4000 - Entrega |     |     |     |     |
+|     | 4001 | Conductor asignado para entrega | 3   | Camino |
+|     |     |     | 10  | En camino segundo intento |
+|     |     |     | 17  | En camino tercer intento |
+|     | 4002 | Entrega confirmada | 6   | Entregado |
+|     |     |     | 12  | Entregada segundo intento |
+|     |     |     | 19  | Entregada tercer intento |
+|     |     |     | 5   |     |
+|     | 4101 | Entrega fallida | 8   | Sin éxito |
+|     |     |     | 16  | Sin éxito segundo intento |
+| 5000 - Devoluciónn |     |     |     |     |
+|     | 5001 | Conductor asignado para devolución | 14.1 | En camino devolución |
+|     | 5002 | Devolución confirmada | 14.2 | Devolución terminada |
+|     | 5101 | Devolución fallida | 14.11 | Sin éxito devolución |
+| 8000 - Terminales |     |     |     |     |
+|     | 8001 | Robo | 15  | Robo o extravio |
+|     | 8002 | Perdido | 15  | Robo o extravio |
+|     | 8003 | Cancelado | 7   | Cancelada |
+|     | 8004 | Dañado | 15.1 | Paquete dañado |
+|     |     |     | 47  |     |
+
