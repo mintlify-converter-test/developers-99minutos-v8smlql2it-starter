@@ -1,0 +1,2743 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API ruta99 v1",
+        "description": "This is the documentation for the public API v1 of ruta99.\n\n## First steps\n\n1.  Ask for a dedicated developers organization for your company. This will act as a sandbox.\n2.  The ruta99 team will provide a `client_id` and `client_secret`.\n3.  Use this credentials to generate the access tokens.",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://{{api_url}}"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "noauthAuth": {
+                "type": "http",
+                "scheme": "noauth"
+            },
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "The API uses the flow of client credentials based on OAuth 2.0 as an authorization mechanism."
+        },
+        {
+            "name": "Customers"
+        },
+        {
+            "name": "Orders"
+        },
+        {
+            "name": "Vehicles"
+        },
+        {
+            "name": "Depots"
+        },
+        {
+            "name": "Scenarios"
+        },
+        {
+            "name": "Route"
+        },
+        {
+            "name": "Settings"
+        }
+    ],
+    "paths": {
+        "/oauth/token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Get access token with client credenciales",
+                "requestBody": {
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "properties": {
+                                    "grant_type": {
+                                        "type": "string",
+                                        "example": "client_credentials"
+                                    },
+                                    "client_id": {
+                                        "type": "string",
+                                        "example": "<id>"
+                                    },
+                                    "client_secret": {
+                                        "type": "string",
+                                        "example": "<secret>"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "noauthAuth": []
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "headers": {
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json; charset=UTF-8"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "1042"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Mon, 16 May 2022 23:42:06 GMT"
+                                }
+                            },
+                            "x-amzn-RequestId": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "d6197038-a023-48e7-9d72-a14c84779c5a"
+                                }
+                            },
+                            "X-Ratelimit-Remaining": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "59"
+                                }
+                            },
+                            "x-amz-apigw-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "SPgkPFKQiYcFc1g="
+                                }
+                            },
+                            "Cache-Control": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-store, private"
+                                }
+                            },
+                            "X-Ratelimit-Limit": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "60"
+                                }
+                            },
+                            "X-Amzn-Trace-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Root=1-6282e14e-7d353bf37891e1607fe067bf;Sampled=0"
+                                }
+                            },
+                            "Pragma": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache"
+                                }
+                            },
+                            "x-amzn-Remapped-Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Mon, 16 May 2022 23:42:06 GMT"
+                                }
+                            },
+                            "X-Cache": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Miss from cloudfront"
+                                }
+                            },
+                            "Via": {
+                                "schema": {
+                                    "type": "number",
+                                    "example": "1.1 37d1a42ef2c37b938204ae53f19c4812.cloudfront.net (CloudFront)"
+                                }
+                            },
+                            "X-Amz-Cf-Pop": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "BOG50-C1"
+                                }
+                            },
+                            "X-Amz-Cf-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "vhwmXr0r469qGKcMz6xGAtIOJsin79_AxI6FkGVqE4CUPhMuqUIGNA=="
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "token_type": "Bearer",
+                                    "expires_in": 31536000,
+                                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNTIwYWNjZjMxODIyMTA3NDVkOWQ0MmZmMTU2Yzk2OGU2NzllM2RmZGUzOWQ1NGJhNWNiNWMyOTU1NWY3NTJiMDg2ZGZjYjJhOWEyNDBlZGYiLCJpYXQiOjE2NTI3NDQ1MjYuMzYxMzU3LCJuYmYiOjE2NTI3NDQ1MjYuMzYxMzYyLCJleHAiOjE2ODQyODA1MjYuMzUwMTE1LCJzdWIiOiIiLCJzY29wZXMiOltdfQ.VWEaLcpTKHuCIUaw84O8iWTPFGu6kCDTDRGs2ySz3DuGnrq0EN3XUG3PCRCTuXKUo0J2OGlkYhX_GFktxP-I6ZpSST1PoXsxCWqIRogX46ilCAHuE8DQs7lbryVqi5e4-_XdU_mDGm--_w8GprnS711DNM8sXiELCg0wCNSgMPOAoRW6vq3iw0p7a5ji7_va5Sl_mf1uEljSa_10JjnEE_ltnUiEhOiteuqw6qrkOjTIevMgADf421SJEIJFkUiUCzTp3OwVW-z9vvJl7UPpdLJg1xVKk4buLaKPV_NkQshdIUk8AkxFjDlpjJY5O5gefC1Ob49GGhsqgWOKpCl8fLO1LaKKQVlL6nG_yffps_l1WehEbtQ6ouT0slRvLOVq0nx4VKV3w-CiNaFAg3yTu-nTz35PvMMmS0wT4bzErkhfEHxo0xbjt1m8K4XVA6S35NQsb83C0kIDmvZrLG2NKZ8RtktOVbkRIIbhpcyeQs9zuss94vclWy4RocaSR3_jhO9UXiA1QI3zXgjc1xYQIJcznQYe4v6qj041aIlEnMDlDCQ74MQ048zPchJr_VbM7Yk2pTx-tZxm4HU8ovj6FBCbG9vxX-4MJoLde6DWFJaCah1YNTyPvSWfYIvNxKhmdSHi5wv20bkTo11tEQYfT1pPVTbpKCTwxAmvMOjKGS4"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/customer": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get all customers",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Create customer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "code": "123445",
+                                    "name": "Customer test 1",
+                                    "email": "customerTest@99minutos.com",
+                                    "phone": "5598585555"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/customer/10": {
+            "get": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Get customer",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/customer/5": {
+            "put": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Update customer",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "code": "123445",
+                                    "name": "Customer test 1 - updated",
+                                    "email": "customerTest@99minutos.com",
+                                    "phone": "5598585555"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Customers"
+                ],
+                "summary": "Delete customer",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/order": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get all orders",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create order",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "scenario_id": 19,
+                                    "code": "AAA01000",
+                                    "country": "Mexico",
+                                    "state": "Estado de mexico",
+                                    "city": "Nezahualcoyotl",
+                                    "address": "C. 9 18, Col Metropolitana, Nezahualcoyotl, 57420",
+                                    "reference": "White house",
+                                    "zip_code": "170150",
+                                    "demand": 1,
+                                    "packages": 1,
+                                    "customer": {
+                                        "code": "545345345",
+                                        "name": "Aaron Bernal",
+                                        "email": "aaron.bernal@99minutos.com",
+                                        "phone": "321654987"
+                                    },
+                                    "items": [
+                                        {
+                                            "quantity": 3,
+                                            "description": "Item 1 description",
+                                            "amount": 300
+                                        },
+                                        {
+                                            "quantity": 1,
+                                            "description": "Item 2 description",
+                                            "amount": 100
+                                        },
+                                        {
+                                            "quantity": 1,
+                                            "description": "Item 1 description",
+                                            "amount": 100
+                                        }
+                                    ],
+                                    "window_start_time": "08:00",
+                                    "window_end_time": "18:00",
+                                    "cash_on_delivery": true,
+                                    "cash_amount": 500,
+                                    "cash_currency": "MXN",
+                                    "type": "delivery"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/guides": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create guides",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "guides": [
+                                        {
+                                            "identifier": "ORDER-CODE1",
+                                            "size": "letter"
+                                        },
+                                        {
+                                            "identifier": "ORDER-CODE2",
+                                            "size": "letter"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "headers": {
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "7874"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Fri, 24 Jun 2022 15:03:13 GMT"
+                                }
+                            },
+                            "x-amzn-RequestId": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "5ea88f95-18c2-46d7-b61a-aa4faeb86a5f"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "*"
+                                }
+                            },
+                            "X-Ratelimit-Remaining": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "59"
+                                }
+                            },
+                            "x-amz-apigw-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "UO3HiHLuCYcF9_g="
+                                }
+                            },
+                            "Cache-Control": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "X-Ratelimit-Limit": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "60"
+                                }
+                            },
+                            "X-Amzn-Trace-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Root=1-62b5d230-23b1392d67b8d75f30413fad;Sampled=0"
+                                }
+                            },
+                            "x-amzn-Remapped-Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Fri, 24 Jun 2022 15:03:13 GMT"
+                                }
+                            },
+                            "X-Cache": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Miss from cloudfront"
+                                }
+                            },
+                            "Via": {
+                                "schema": {
+                                    "type": "number",
+                                    "example": "1.1 9ed8916b9feb65549f1dda4f6da86046.cloudfront.net (CloudFront)"
+                                }
+                            },
+                            "X-Amz-Cf-Pop": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "BOG50-C1"
+                                }
+                            },
+                            "X-Amz-Cf-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "NH_gKkChrWQiEBubku8_wGgiFPDLUM5d9cL4M5gCoeL857IMrkhv_Q=="
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Successful pdf guides.",
+                                    "data": [
+                                        {
+                                            "id": "FF0078997",
+                                            "pdf": "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b250Ci9TdWJ0eXBlIC9UeXBlMQovTmFtZSAvRjIKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZAovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL1R5cGUgL1hPYmplY3QKL1N1YnR5cGUgL0ltYWdlCi9XaWR0aCAyMjQKL0hlaWdodCAzMAovRmlsdGVyIC9GbGF0ZURlY29kZQovRGVjb2RlUGFybXMgPDwgL1ByZWRpY3RvciAxNSAvQ29sb3JzIDEgL0NvbHVtbnMgMjI0IC9CaXRzUGVyQ29tcG9uZW50IDg+PgovQ29sb3JTcGFjZSAvRGV2aWNlR3JheQovQml0c1BlckNvbXBvbmVudCA4Ci9MZW5ndGggOTQ+PgpzdHJlYW0KWIXtz0EKwCAMBMD8/9NpSxtcKfTU4wiKRuMy1eeouuasubtvp/JV7Z6f1l9Z23Oyf87vt9mV2Xt6pmbmUwUEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAT8D3gAGXaLLAplbmRzdHJlYW0KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9YT2JqZWN0Ci9TdWJ0eXBlIC9JbWFnZQovV2lkdGggMjI0Ci9IZWlnaHQgMzAKL1NNYXNrIDEwIDAgUgovRmlsdGVyIC9GbGF0ZURlY29kZQovRGVjb2RlUGFybXMgPDwgL1ByZWRpY3RvciAxNSAvQ29sb3JzIDEgL0NvbHVtbnMgMjI0IC9CaXRzUGVyQ29tcG9uZW50IDE+PgovQ29sb3JTcGFjZSAgWyAvSW5kZXhlZCAvRGV2aWNlUkdCIDAgMTIgMCBSIF0KL0JpdHNQZXJDb21wb25lbnQgMQovTGVuZ3RoIDE3Pj4Kc3RyZWFtCiiRY2AYBaNgFNAWAAADZgABCmVuZHN0cmVhbQplbmRvYmoKMTIgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUKL0xlbmd0aCAxMSA+PgpzdHJlYW0KeJxjYGAAAAADAAEKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTMKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDA5IDAwMDAwIG4gCjAwMDAwMDAwNzQgMDAwMDAgbiAKMDAwMDAwMDEyMCAwMDAwMCBuIAowMDAwMDAwMzIyIDAwMDAwIG4gCjAwMDAwMDAzNTkgMDAwMDAgbiAKMDAwMDAwMDUxMCAwMDAwMCBuIAowMDAwMDAwNjEzIDAwMDAwIG4gCjAwMDAwMDQzNzQgMDAwMDAgbiAKMDAwMDAwNDQ4MSAwMDAwMCBuIAowMDAwMDA0NTkzIDAwMDAwIG4gCjAwMDAwMDQ5MzAgMDAwMDAgbiAKMDAwMDAwNTIyNiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDEzCi9Sb290IDEgMCBSCi9JbmZvIDUgMCBSCi9JRFs8Y2MwZWQ4YzhlY2Q2YTFkOTA1YjkzODQ0OTEzOTExZTE+PGNjMGVkOGM4ZWNkNmExZDkwNWI5Mzg0NDkxMzkxMWUxPl0KPj4Kc3RhcnR4cmVmCjUzMDkKJSVFT0YK"
+                                        }
+                                    ],
+                                    "errors": [
+                                        {
+                                            "id": "ORDER-CODE2",
+                                            "message": "identifier does not exist in the system ORDER-CODE2"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/guidesByScenario": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Create guides by scenario id",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "guides": [
+                                        {
+                                            "identifier": "ORDER-CODE1",
+                                            "size": "letter"
+                                        },
+                                        {
+                                            "identifier": "ORDER-CODE2",
+                                            "size": "letter"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "scenario",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "headers": {
+                            "Content-Type": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "application/json"
+                                }
+                            },
+                            "Content-Length": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "7874"
+                                }
+                            },
+                            "Connection": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "keep-alive"
+                                }
+                            },
+                            "Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Fri, 24 Jun 2022 15:03:13 GMT"
+                                }
+                            },
+                            "x-amzn-RequestId": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "5ea88f95-18c2-46d7-b61a-aa4faeb86a5f"
+                                }
+                            },
+                            "Access-Control-Allow-Origin": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "*"
+                                }
+                            },
+                            "X-Ratelimit-Remaining": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "59"
+                                }
+                            },
+                            "x-amz-apigw-id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "UO3HiHLuCYcF9_g="
+                                }
+                            },
+                            "Cache-Control": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "no-cache, private"
+                                }
+                            },
+                            "X-Ratelimit-Limit": {
+                                "schema": {
+                                    "type": "integer",
+                                    "example": "60"
+                                }
+                            },
+                            "X-Amzn-Trace-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Root=1-62b5d230-23b1392d67b8d75f30413fad;Sampled=0"
+                                }
+                            },
+                            "x-amzn-Remapped-Date": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Fri, 24 Jun 2022 15:03:13 GMT"
+                                }
+                            },
+                            "X-Cache": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "Miss from cloudfront"
+                                }
+                            },
+                            "Via": {
+                                "schema": {
+                                    "type": "number",
+                                    "example": "1.1 9ed8916b9feb65549f1dda4f6da86046.cloudfront.net (CloudFront)"
+                                }
+                            },
+                            "X-Amz-Cf-Pop": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "BOG50-C1"
+                                }
+                            },
+                            "X-Amz-Cf-Id": {
+                                "schema": {
+                                    "type": "string",
+                                    "example": "NH_gKkChrWQiEBubku8_wGgiFPDLUM5d9cL4M5gCoeL857IMrkhv_Q=="
+                                }
+                            }
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "message": "Successful pdf guides.",
+                                    "data": [
+                                        {
+                                            "id": "FF0078997",
+                                            "pdf": "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b250Ci9TdWJ0eXBlIC9UeXBlMQovTmFtZSAvRjIKL0Jhc2VGb250IC9IZWx2ZXRpY2EtQm9sZAovRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZwo+PgplbmRvYmoKMTAgMCBvYmoKPDwKL1R5cGUgL1hPYmplY3QKL1N1YnR5cGUgL0ltYWdlCi9XaWR0aCAyMjQKL0hlaWdodCAzMAovRmlsdGVyIC9GbGF0ZURlY29kZQovRGVjb2RlUGFybXMgPDwgL1ByZWRpY3RvciAxNSAvQ29sb3JzIDEgL0NvbHVtbnMgMjI0IC9CaXRzUGVyQ29tcG9uZW50IDg+PgovQ29sb3JTcGFjZSAvRGV2aWNlR3JheQovQml0c1BlckNvbXBvbmVudCA4Ci9MZW5ndGggOTQ+PgpzdHJlYW0KWIXtz0EKwCAMBMD8/9NpSxtcKfTU4wiKRuMy1eeouuasubtvp/JV7Z6f1l9Z23Oyf87vt9mV2Xt6pmbmUwUEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAT8D3gAGXaLLAplbmRzdHJlYW0KZW5kb2JqCjExIDAgb2JqCjw8Ci9UeXBlIC9YT2JqZWN0Ci9TdWJ0eXBlIC9JbWFnZQovV2lkdGggMjI0Ci9IZWlnaHQgMzAKL1NNYXNrIDEwIDAgUgovRmlsdGVyIC9GbGF0ZURlY29kZQovRGVjb2RlUGFybXMgPDwgL1ByZWRpY3RvciAxNSAvQ29sb3JzIDEgL0NvbHVtbnMgMjI0IC9CaXRzUGVyQ29tcG9uZW50IDE+PgovQ29sb3JTcGFjZSAgWyAvSW5kZXhlZCAvRGV2aWNlUkdCIDAgMTIgMCBSIF0KL0JpdHNQZXJDb21wb25lbnQgMQovTGVuZ3RoIDE3Pj4Kc3RyZWFtCiiRY2AYBaNgFNAWAAADZgABCmVuZHN0cmVhbQplbmRvYmoKMTIgMCBvYmoKPDwgL0ZpbHRlciAvRmxhdGVEZWNvZGUKL0xlbmd0aCAxMSA+PgpzdHJlYW0KeJxjYGAAAAADAAEKZW5kc3RyZWFtCmVuZG9iagp4cmVmCjAgMTMKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDA5IDAwMDAwIG4gCjAwMDAwMDAwNzQgMDAwMDAgbiAKMDAwMDAwMDEyMCAwMDAwMCBuIAowMDAwMDAwMzIyIDAwMDAwIG4gCjAwMDAwMDAzNTkgMDAwMDAgbiAKMDAwMDAwMDUxMCAwMDAwMCBuIAowMDAwMDAwNjEzIDAwMDAwIG4gCjAwMDAwMDQzNzQgMDAwMDAgbiAKMDAwMDAwNDQ4MSAwMDAwMCBuIAowMDAwMDA0NTkzIDAwMDAwIG4gCjAwMDAwMDQ5MzAgMDAwMDAgbiAKMDAwMDAwNTIyNiAwMDAwMCBuIAp0cmFpbGVyCjw8Ci9TaXplIDEzCi9Sb290IDEgMCBSCi9JbmZvIDUgMCBSCi9JRFs8Y2MwZWQ4YzhlY2Q2YTFkOTA1YjkzODQ0OTEzOTExZTE+PGNjMGVkOGM4ZWNkNmExZDkwNWI5Mzg0NDkxMzkxMWUxPl0KPj4Kc3RhcnR4cmVmCjUzMDkKJSVFT0YK"
+                                        }
+                                    ],
+                                    "errors": [
+                                        {
+                                            "id": "ORDER-CODE2",
+                                            "message": "identifier does not exist in the system ORDER-CODE2"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/order/1": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get order",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update order",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "scenario_id": 19,
+                                    "code": "impedit",
+                                    "latitude": 150781.53900472,
+                                    "longitude": 30634.3,
+                                    "demand": 658395.73
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete order",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/vehicle": {
+            "get": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Get all vehicles",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Create vehicle",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "code": {
+                                        "type": "string",
+                                        "example": "VEHICLE-LICENSE"
+                                    },
+                                    "capacity": {
+                                        "type": "integer",
+                                        "example": "50"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "John Doe"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "jhon@99minutos.com"
+                                    },
+                                    "picture": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "depot_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Delete vehicle",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/vehicle/1": {
+            "get": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Get vehicle",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Vehicles"
+                ],
+                "summary": "Update vehicle",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "picture": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/depot": {
+            "get": {
+                "tags": [
+                    "Depots"
+                ],
+                "summary": "Get all depots",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Depots"
+                ],
+                "summary": "Create depot",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "name": "Depósito 1",
+                                    "description": "Depósito de pruebas",
+                                    "latitude": 20.677,
+                                    "longitude": -103.347,
+                                    "address": "99minutos guadalajara"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/depot/{depot_id}/vehicle": {
+            "get": {
+                "tags": [
+                    "Depots"
+                ],
+                "summary": "Get vehicles from the depot",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "depot_id",
+                        "in": "path",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/depot/1": {
+            "put": {
+                "tags": [
+                    "Depots"
+                ],
+                "summary": "Update depot",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "code": "vero",
+                                    "capacity": 5821948.39067,
+                                    "name": "porro",
+                                    "phone": "sint",
+                                    "email": "eaque",
+                                    "description": "consectetur"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Depots"
+                ],
+                "summary": "Delete depot",
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario": {
+            "get": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Get all scenarios",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Create scenario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "date": "2021-08-09",
+                                    "name": "Escenario 1",
+                                    "depot_id": 1,
+                                    "vehicles": [
+                                        1,
+                                        2,
+                                        3
+                                    ],
+                                    "service_time": 10,
+                                    "start_time": "08:00",
+                                    "end_time": "20:00"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/124/copy": {
+            "post": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Duplicate a scenario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "date": "2022-03-08",
+                                    "name": "Escenario Copiado 2"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/complete": {
+            "post": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Create complete scenario",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Escenario 1"
+                                    },
+                                    "date": {
+                                        "type": "string",
+                                        "example": "2021-12-23"
+                                    },
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "depot_id": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "vehicles[]": {
+                                        "type": "integer",
+                                        "example": "1"
+                                    },
+                                    "service_time": {
+                                        "type": "integer",
+                                        "example": "10"
+                                    },
+                                    "start_time": {
+                                        "type": "string",
+                                        "example": "09:00"
+                                    },
+                                    "end_time": {
+                                        "type": "string",
+                                        "example": "18:00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1/optimize": {
+            "post": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Optimize Scenario",
+                "requestBody": {
+                    "content": {}
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/214/fetch-best-solution": {
+            "get": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Fetch Best solution",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/38/cancel": {
+            "put": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Cancel optimization",
+                "requestBody": {
+                    "content": {}
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1": {
+            "get": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Get scenario",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Update scenario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "date": "non",
+                                    "name": "dolores"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1/export": {
+            "get": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Export scenario",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/11": {
+            "delete": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Delete scenario",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1/vehicles": {
+            "put": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Attaches several vehicles to a scenario",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "vehicles": [
+                                        2,
+                                        3
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/6/vehicle/17": {
+            "delete": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Remove vehicle from a scenario",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1/import": {
+            "post": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Imports orders contained in a file",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "file": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/scenario/1/order": {
+            "get": {
+                "tags": [
+                    "Scenarios"
+                ],
+                "summary": "Get list all orders inside the scenario",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/route/319/reorder": {
+            "put": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Update stops order",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "stops": [
+                                        6633,
+                                        6630,
+                                        6631,
+                                        6632,
+                                        6634
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/route/export": {
+            "get": {
+                "tags": [
+                    "Route"
+                ],
+                "summary": "Export completed routes",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/settings/solver": {
+            "get": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Get solver settings",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Update solver settings",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "time_weight": 5,
+                                    "distance_weight": 1,
+                                    "balanced_load": false,
+                                    "use_all_vehicles": true,
+                                    "must_return_to_depot": false,
+                                    "last_stop_near_depot": false
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/settings/cod": {
+            "get": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Get cod settings",
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    },
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Settings"
+                ],
+                "summary": "Update cod settings",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "time_weight": 5,
+                                    "distance_weight": 1,
+                                    "balanced_load": false,
+                                    "use_all_vehicles": true,
+                                    "must_return_to_depot": false,
+                                    "last_stop_near_depot": false
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "Accept",
+                        "in": "header",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "application/json"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
